@@ -1,0 +1,18 @@
+% Name, ConditionType, Target Type, Number of Targets, Value1, Value2(if any)
+Constraint,prescribedDisplacement,Node,2,0
+1 2
+
+%Point Load,pointLoad,Node,1,-60e3
+%4
+
+%Distributed Load,distributedLoad,Element,2,2e3
+%1 2
+
+%Precribed Displacement,prescribedDisplacement,Node,2,-0.01
+%2
+
+%Temperature Load,temperatureLoad,Element,2,50,150
+%1 2
+
+Elastic support,elasticSupport,1,20e3
+5
