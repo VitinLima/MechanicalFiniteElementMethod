@@ -1,11 +1,9 @@
 %  Initializing displacement vector
 U = zeros(columns(K), 1);
-%  Initializing forces vector
-F = zeros(columns(K), 1);
 
 %  Mark unknown displacements to be solved
 sU = zeros(columns(K), 1);
-%  Known forces
+%  Mark known forces
 sF = ones(columns(K), 1);
 
 % Boundary Conditions
@@ -22,14 +20,14 @@ for i = 1:length(BC)
 		end
 	elseif strcmp(BC(i).conditionType, 'distributedLoad')
 		for j = BC(i).targets
-			Kidx2 = 2*E.Elements(j,1);
+			Kidx2 = 2*E(j,1);
 			Kidx1 = Kidx2 - 1;
-			Kidx4 = 2*E.Elements(j,2);
+			Kidx4 = 2*E(j,2);
 			Kidx3 = Kidx4 - 1;
-			Fdl(Kidx1) += BC(i).value*E.Length(j)/2;
-			Fdl(Kidx2) += BC(i).value*E.Length(j)*E.Length(j)/12;
-			Fdl(Kidx3) += BC(i).value*E.Length(j)/2;
-			Fdl(Kidx4) -= BC(i).value*E.Length(j)*E.Length(j)/12;
+			Fdl(Kidx1) += BC(i).value*E(j,6)/2;
+			Fdl(Kidx2) += BC(i).value*E(j,6)*E(j,6)/12;
+			Fdl(Kidx3) += BC(i).value*E(j,6)/2;
+			Fdl(Kidx4) -= BC(i).value*E(j,6)*E(j,6)/12;
 		end
 	elseif strcmp(BC(i).conditionType, 'prescribedDisplacement')
 		for j = BC(i).targets
@@ -41,12 +39,12 @@ for i = 1:length(BC)
 	elseif strcmp(BC(i).conditionType, 'temperatureLoad')
 		#  Temperature loads
 		for j = BC(i).targets
-			Kidx2 = 2*E.Elements(j,1);
+			Kidx2 = 2*E(j,1);
 			Kidx1 = Kidx2 - 1;
-			Kidx4 = 2*E.Elements(j,2);
+			Kidx4 = 2*E(j,2);
 			Kidx3 = Kidx4 - 1;
 			dT = BC(i).value(1) - BC(i).value(2); %Kelvin
-			Tau = E.ThermalExpansionCoefficient(j)*EI(j)/E.Height(j)*dT;
+			Tau = E(j,8)*E(j,3)*E(j,7)/E(j,4)*dT;
 			Ft(Kidx2) -= Tau;
 			Ft(Kidx4) += Tau;
 		end
@@ -57,4 +55,3 @@ for i = 1:length(BC)
 		end
 	end
 end
-F = Fpl - Fdl - Fpd - Ft;

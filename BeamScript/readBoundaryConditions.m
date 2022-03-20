@@ -1,25 +1,33 @@
-clear;
-clc;
+% Boundary conditions
+BC = struct('name',{},'conditionType',{},'targetType',{},'numberOfTargets',{},'value',{},'targets',{});
 
 [fid, msg] = fopen("BoundaryConditions.txt");
 
-lines = {};
-while (l=fgetl(fid)) != -1
-	lines(end+1) = l;
-endwhile
-
-fclose(fid);
-
-% Boundary conditions
-BC = struct('name',{},'conditionType',{},'targetType',{},'targets',{},'value',{});
-
-for s = lines
-	s = cell2mat(s);
+flag = true;
+while flag
+	if (s=fgetl(fid)) == -1
+		flag = false;
+		continue;
+	end
 	if isempty(s)
 		continue;
 	end
 	if s(1) == '%' || s(1) == '#'
 		continue;
 	end
-	
-endfor
+	s = strsplit(s, ',');
+	BC(end+1).name = cell2mat(s(1));
+	BC(end).conditionType = cell2mat(s(2));
+	BC(end).targetType = cell2mat(s(3));
+	BC(end).numberOfTargets = str2double(cell2mat(s(4)));
+	BC(end).value = str2double(cell2mat(s(5)));
+	while length(BC(end).targets) < BC(end).numberOfTargets && flag
+		if (s=fgetl(fid)) == -1
+			flag = false;
+			continue;
+		end
+		BC(end).targets = [BC(end).targets, str2double(strsplit(s,' '))];
+	end
+endwhile
+
+fclose(fid);
