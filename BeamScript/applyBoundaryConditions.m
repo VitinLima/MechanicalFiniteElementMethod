@@ -3,8 +3,6 @@ U = zeros(columns(K), 1);
 
 %  Mark unknown displacements to be solved
 sU = zeros(columns(K), 1);
-%  Mark known forces
-sF = ones(columns(K), 1);
 
 % Boundary Conditions
 Fpl = zeros(columns(K),1); % Point loads
@@ -33,7 +31,6 @@ for bc = BC
 		for j = bc.targets
 			sU(j) = 1; % Known displacement
 			U(j) += str2double(bc.value);
-			sF(j) = 0; % Unknown force
 			Fpd += K(:,j)*U(j);
 		end
 	elseif strcmp(bc.conditionType, 'temperatureLoad')
@@ -44,13 +41,12 @@ for bc = BC
 			Kidx4 = 2*E(j,2);
 			Kidx3 = Kidx4 - 1;
 			dT = str2double(bc.value(1)) - str2double(bc.value(2)); %Kelvin
-			Tau = E(j,8)*E(j,3)*E(j,7)/E(j,4)*dT;
-			Ft(Kidx2) -= Tau;
-			Ft(Kidx4) += Tau;
+			Tau = E(j,8)*E(j,3)*E(j,7)/E(j,5)*dT;
+			Ft(Kidx2) += Tau;
+			Ft(Kidx4) -= Tau;
 		end
 	elseif strcmp(bc.conditionType, 'elasticSupport')
 		for j = bc.targets
-			sF(j) = 0;
 			Kes(j,j) += str2double(bc.value);
 		end
 	end

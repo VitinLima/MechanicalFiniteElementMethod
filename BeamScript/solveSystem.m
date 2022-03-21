@@ -1,15 +1,9 @@
 % Solving system
 %  Solving unconstrained displacements with known forces
-sIdx = sU == 0;
-U(sIdx) = (K(sIdx,sIdx) - Kes(sIdx,sIdx))\(Fpl(sIdx) - Fdl(sIdx) - Fpd(sIdx) - Ft(sIdx));
+U(sU==0) = (K(sU==0,sU==0) + Kes(sU==0,sU==0))\(Fpl(sU==0) - Fdl(sU==0) - Fpd(sU==0) - Ft(sU==0));
 
-%  Finding total forces actuating upon nodes
-F = K*U;
-
-%  Finding reactions on supports
-R = zeros(columns(K));
-R = F + Fdl + Ft;
+Reactions = K*U - Fpl + Fpd + Fdl + Ft;
 
 % Filter too small values that can be disconsidered
-R(abs(R) < 1e-5) = 0;
-U(abs(U) < 1e-10) = 0;
+U(abs(U) < 1e-7) = 0;
+Reactions(abs(Reactions) < 1e-7) = 0;

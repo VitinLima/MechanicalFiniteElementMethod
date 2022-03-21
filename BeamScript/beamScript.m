@@ -8,9 +8,9 @@ applyBoundaryConditions;
 solveSystem;
 
 % Display results
-##format short eng;
-disp("Displacement:");
+disp("Displacements");
 disp(U);
+
 disp("");
-disp("Reactions:");
-disp(R);
+disp("Reactions");
+disp(Reactions);

@@ -1,8 +1,0 @@
-% Elements
-YoungModulus = 200e9
-Base = 0.2
-Height = 0.4
-ThermalExpansionCoefficient = 1.2e-5
-% Element Nodes
-1 2
-2 3

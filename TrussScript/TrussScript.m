@@ -7,6 +7,7 @@ readBoundaryConditions;
 applyBoundaryConditions;
 solveSystem;
 
+% Display results
 disp('Displacements');
 disp(U);
 
@@ -22,4 +23,4 @@ endfor
 
 disp('');
 disp('Reactions');
-disp(K*U);
+disp(Reactions);
