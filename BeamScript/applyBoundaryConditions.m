@@ -13,45 +13,45 @@ Fpd = zeros(columns(K),1); % Prescribed displacement loads
 Ft = zeros(columns(K),1); % Temperature loads
 Kes = sparse(rows(K), columns(K)); % Elastic suport stiffness matrix
 
-for i = 1:length(BC)
-	if strcmp(BC(i).conditionType, 'pointLoad')
-		for j = BC(i).targets
-			Fpl(j) += BC(i).value;
+for bc = BC
+	if strcmp(bc.conditionType, 'pointLoad')
+		for j = bc.targets
+			Fpl(j) += str2double(bc.value);
 		end
-	elseif strcmp(BC(i).conditionType, 'distributedLoad')
-		for j = BC(i).targets
+	elseif strcmp(bc.conditionType, 'distributedLoad')
+		for j = bc.targets
 			Kidx2 = 2*E(j,1);
 			Kidx1 = Kidx2 - 1;
 			Kidx4 = 2*E(j,2);
 			Kidx3 = Kidx4 - 1;
-			Fdl(Kidx1) += BC(i).value*E(j,6)/2;
-			Fdl(Kidx2) += BC(i).value*E(j,6)*E(j,6)/12;
-			Fdl(Kidx3) += BC(i).value*E(j,6)/2;
-			Fdl(Kidx4) -= BC(i).value*E(j,6)*E(j,6)/12;
+			Fdl(Kidx1) += str2double(bc.value)*E(j,6)/2;
+			Fdl(Kidx2) += str2double(bc.value)*E(j,6)*E(j,6)/12;
+			Fdl(Kidx3) += str2double(bc.value)*E(j,6)/2;
+			Fdl(Kidx4) -= str2double(bc.value)*E(j,6)*E(j,6)/12;
 		end
-	elseif strcmp(BC(i).conditionType, 'prescribedDisplacement')
-		for j = BC(i).targets
+	elseif strcmp(bc.conditionType, 'prescribedDisplacement')
+		for j = bc.targets
 			sU(j) = 1; % Known displacement
-			U(j) += BC(i).value;
+			U(j) += str2double(bc.value);
 			sF(j) = 0; % Unknown force
 			Fpd += K(:,j)*U(j);
 		end
-	elseif strcmp(BC(i).conditionType, 'temperatureLoad')
+	elseif strcmp(bc.conditionType, 'temperatureLoad')
 		#  Temperature loads
-		for j = BC(i).targets
+		for j = bc.targets
 			Kidx2 = 2*E(j,1);
 			Kidx1 = Kidx2 - 1;
 			Kidx4 = 2*E(j,2);
 			Kidx3 = Kidx4 - 1;
-			dT = BC(i).value(1) - BC(i).value(2); %Kelvin
+			dT = str2double(bc.value(1)) - str2double(bc.value(2)); %Kelvin
 			Tau = E(j,8)*E(j,3)*E(j,7)/E(j,4)*dT;
 			Ft(Kidx2) -= Tau;
 			Ft(Kidx4) += Tau;
 		end
-	elseif strcmp(BC(i).conditionType, 'elasticSupport')
-		for j = BC(i).targets
+	elseif strcmp(bc.conditionType, 'elasticSupport')
+		for j = bc.targets
 			sF(j) = 0;
-			Kes(j,j) += BC(i).value;
+			Kes(j,j) += str2double(bc.value);
 		end
 	end
 end

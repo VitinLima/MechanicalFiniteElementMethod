@@ -2,7 +2,7 @@
 
 %Odd nodes refer to translation
 %Even nodes refer to rotation
-Constraint,prescribedDisplacement,Node,1,0
+Constraint,prescribedDisplacement,Node,2,0
 1 5 6
 
 Point Load,pointLoad,Node,1,-60e3

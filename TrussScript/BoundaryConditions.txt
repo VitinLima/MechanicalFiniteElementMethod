@@ -1,0 +1,16 @@
+% Name, ConditionType, Target Type, Number of Targets, Value1,value2,...
+
+%Odd nodes refer to translation x
+%Even nodes refer to translation y
+Constraint,prescribedDisplacement,Node,4,0
+3 4 5 6
+
+Point Load,pointLoad,Node,1,polar,60e3,-60
+1
+
+%Precribed Displacement,prescribedDisplacement,Node,1,-0.01
+%2
+
+%Does apply?
+%Elastic support,elasticSupport,Node,1,20e3
+%5
