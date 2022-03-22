@@ -14,3 +14,5 @@ disp(U);
 disp("");
 disp("Reactions");
 disp(Reactions);
+
+createFigures;

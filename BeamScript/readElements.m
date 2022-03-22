@@ -10,8 +10,7 @@ fclose(fid);
 idx = 1;
 for s = lines
 	s = cell2mat(s);
-	s = strsplit(s, ' ');
-	N(idx++,:) = str2double(s);
+	N(idx++, 1) = str2double(s);
 endfor
 
 [fid, msg] = fopen("Elements.txt");
@@ -55,8 +54,5 @@ for s = lines
 	end
 	s = strsplit(s, ' ');
 	E(idx,:) = [str2double(s), YM, B, H, 0, B*H*H*H/12, TEC];
-	p = N(E(idx,1:2),:);
-	dx = p(1,1) - p(2,1);
-	dy = p(1,2) - p(2,2);
-	E(idx++,6) = sqrt(dx*dx + dy*dy);
+	E(idx,6) = abs(N(E(idx, 2)) - N(E(idx++, 1)));
 endfor

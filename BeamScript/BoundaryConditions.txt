@@ -1,21 +1,19 @@
 % Name, ConditionType, Target Type, Number of Targets, Value1, Value2(if any)
 
-%Odd nodes refer to translation
-%Even nodes refer to rotation
-Constraint,prescribedDisplacement,Node,2,0
-1 2 5 6
+Constraint,prescribedTranslationalDisplacement,Node,1,0
+1
 
-Point Load,pointLoad,Node,1,-60e3
-4
+Point Load,momentLoad,Node,1,-60e3
+2
 
-%Distributed Load,distributedLoad,Element,2,2e3
-%1 2
+Distributed Load,distributedForceLoad,Element,2,-2e3
+1 2
 
-%Precribed Displacement,prescribedDisplacement,Node,1,-0.01
-%2
+Precribed Displacement,prescribedRotationalDisplacement,Node,1,-0.01
+1
 
 Temperature Load,temperatureLoad,Element,2,50,150
 1 2
 
-%Elastic support,elasticSupport,Node,1,20e3
-%5
+Elastic support,translationalElasticSupport,Node,1,20e3
+3
