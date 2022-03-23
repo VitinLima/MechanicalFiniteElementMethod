@@ -1,3 +1,5 @@
+cd(sim.directory)
+
 [fid, msg] = fopen("Nodes.txt");
 
 lines = {};
@@ -56,3 +58,5 @@ for s = lines
 	E(idx,:) = [str2double(s), YM, B, H, 0, B*H*H*H/12, TEC];
 	E(idx,6) = abs(N(E(idx, 2)) - N(E(idx++, 1)));
 endfor
+
+cd(program.pwd);

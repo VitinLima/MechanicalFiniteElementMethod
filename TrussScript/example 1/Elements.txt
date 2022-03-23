@@ -1,0 +1,5 @@
+YoungModulus = 200e9
+Diameter = 50e-3
+1 3
+1 2
+2 3

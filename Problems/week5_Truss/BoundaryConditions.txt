@@ -1,0 +1,7 @@
+% Name, ConditionType, Target Type, Number of Targets, Value1,[value2],(supportOrientation)
+
+Constraint,prescribedDisplacement,cartesian,Node,1,0,0,left
+2 3
+
+Point Load,load,polar,Node,1,60e3,-60,left
+1

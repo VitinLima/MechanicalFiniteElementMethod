@@ -1,6 +1,6 @@
 % Solving system
 %  Solving unconstrained displacements with known forces
-U(sU==0) = (K(sU==0,sU==0) - Kes(sU==0,sU==0))\(Fpl(sU==0) - Fpd(sU==0));
+U(sU==0) = (K(sU==0,sU==0) - Kes(sU==0,sU==0))\(Fl(sU==0) - Fpd(sU==0));
 
 T = zeros(rows(E),1);
 
@@ -14,7 +14,7 @@ for i = 1:rows(E)
 	T(i) = E(i,3)*E(i,5)/E(i,6)*(E(i,6) - sqrt(dx*dx + dy*dy));
 endfor
 
-Reactions = K*U - Fpl + Fpd;
+Reactions = K*U - Fl + Fpd;
 
 % Filter too small values that can be disconsidered
 U(abs(U) < 1e-10) = 0;

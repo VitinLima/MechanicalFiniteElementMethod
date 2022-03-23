@@ -1,0 +1,14 @@
+% Name, Condition Type, Coordinate Type, Target Type, Number of Targets, Value1,[value2],(supportOrientation)
+
+Constraint,prescribedDisplacement,cartesian,Node,1,0,0
+3
+
+Point Load,load,polar,Node,1,60e3,-60
+1
+
+Precribed Displacement,prescribedDisplacement,horizontal,Node,1,0,right
+2
+
+%Does apply?
+%Elastic support,elasticSupport,cartesian,Node,1,20e3
+%5

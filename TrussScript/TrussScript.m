@@ -1,6 +1,9 @@
 clear;
 clc;
 
+program.pwd = pwd;
+sim.directory = uigetdir('', 'Simulation directory');
+
 readElements;
 buildSystem;
 readBoundaryConditions;
@@ -24,3 +27,5 @@ endfor
 disp('');
 disp('Reactions');
 disp(Reactions);
+
+createFigures;

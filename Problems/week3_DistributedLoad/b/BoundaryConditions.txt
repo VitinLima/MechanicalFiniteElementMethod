@@ -1,0 +1,13 @@
+% Name, ConditionType, Target Type, Number of Targets, Value1,[value2],(supportOrientation)
+
+Constraint,prescribedTranslationalDisplacement,Node,2,0
+1 3
+
+Constraint,prescribedRotationalDisplacement,Node,2,0
+1 3
+
+Point Load,momentLoad,Node,1,-60e3
+2
+
+Distributed Load,distributedForceLoad,Element,2,-2e3
+1 2

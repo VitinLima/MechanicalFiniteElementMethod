@@ -93,6 +93,6 @@ for bc = BC
 			endfor
 		endif
 	elseif strcmp(bc.conditionType, 'translationalElasticSupport')
-		line([N(bc.targets) N(bc.targets)-0.1 N(bc.targets)+0.1 N(bc.targets)-0.1 N(bc.targets)+0.1 N(bc.targets)-0.1 N(bc.targets)+0.1 N(bc.targets)-0.1 N(bc.targets)+0.1 N(bc.targets)-0.1 N(bc.targets)].', -[0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5].', 'color', 'yellow')
+		line([N(bc.targets) N(bc.targets)-0.1 N(bc.targets)+0.1 N(bc.targets)-0.1 N(bc.targets)+0.1 N(bc.targets)-0.1 N(bc.targets)+0.1 N(bc.targets)-0.1 N(bc.targets)+0.1 N(bc.targets)-0.1 N(bc.targets)].', -[0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5].', 'color', 'black')
 	end
 endfor

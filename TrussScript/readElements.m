@@ -1,3 +1,5 @@
+cd(sim.directory);
+
 [fid, msg] = fopen("Nodes.txt");
 
 lines = {};
@@ -11,7 +13,7 @@ idx = 1;
 for s = lines
 	s = cell2mat(s);
 	s = strsplit(s, ' ');
-	N(idx++,:) = str2double(s);
+	N(idx++,:) = str2double(s(1:2));
 endfor
 
 [fid, msg] = fopen("Elements.txt");
@@ -50,3 +52,5 @@ for s = lines
 	dy = p(1,2) - p(2,2);
 	E(idx++,6) = sqrt(dx*dx + dy*dy);
 endfor
+
+cd(program.pwd);
