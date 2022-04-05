@@ -1,0 +1,53 @@
+BOUNDARY CONDITION
+% Lines within a "BOUNDARY CONDITION" block that starts with percentage (%) are considered comments
+% Beware that placing comments after inputs may give an error or, even worse, not be detected and wield
+% unexpected results
+% Empty lines are ignored
+% The name can be whatever you want, or none
+% The values are separated with commas
+% Nodes and elements should be entered without breaking lines
+% If entered again, the input will be overwritten
+
+Name = Translational prescribed displacement
+Condition = Translation
+Value = 0,0
+Nodes = 13152
+Nodes = 1 5
+END
+
+BOUNDARY CONDITION
+% Define the coordinate system of your choosing, cartesian (x,y), polar (R,theta), horizontal (for a
+% single value in the horizontal direction), or vertical (for the vertical direction), the default
+% system is cartesian
+% When the coordinate system is set to cartesian, it is possible to leave one direction unrestrained
+% by leaving its field empty
+% This will only work with cartesian coordinates, if attempted with
+% polar coordinates, it will suppress the boundary condition
+% The "DisplayOrientation" input is used when plotting, but does not interfere with the system
+% Distributed loads affect elements
+Name = Distributed Load
+Condition = Force
+CoordinateSystem = Cartesian
+Value = ,-2.25e3
+DisplayOrientation = Bottom
+Elements = 2 3
+END
+
+BOUNDARY CONDITION
+Name = Rotational prescribed displacement
+Condition = Rotation
+Value = 0 0
+Nodes = 1 5
+END
+
+BOUNDARY CONDITION
+% Point loads affect nodes
+Name = Moment Load
+Condition = Moment
+Value = -1.5e3
+Nodes = 3
+END
+
+All that is not within a "BOUNDARY CONDITION" block is considered a comment
+The script for parsing the boundary conditions is quite flexible, i attempted to leave as easy, practical,
+and intuitive as possible, but it may be edited for further improvements.
